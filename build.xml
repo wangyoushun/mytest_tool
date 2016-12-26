@@ -1,0 +1,427 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- WARNING: Eclipse auto-generated file.
+              Any modifications will be overwritten.
+              To include a user specific buildfile here, simply create one in the same
+              directory with the processing instruction <?eclipse.ant.import?>
+              as the first entry and export the buildfile again. --><project basedir="." default="build" name="mytest_tool">
+    <property environment="env"/>
+    <property name="ECLIPSE_HOME" value="../../../programfile/eclipse"/>
+    <property name="junit.output.dir" value="junit"/>
+    <property name="debuglevel" value="source,lines,vars"/>
+    <property name="target" value="1.7"/>
+    <property name="source" value="1.7"/>
+    <path id="Apache Tomcat v7.0 [Apache Tomcat v7.0].libraryclasspath">
+        <pathelement location="../../../programfile/apache-tomcat-7.0.67/lib/annotations-api.jar"/>
+        <pathelement location="../../../programfile/apache-tomcat-7.0.67/lib/catalina-ant.jar"/>
+        <pathelement location="../../../programfile/apache-tomcat-7.0.67/lib/catalina-ha.jar"/>
+        <pathelement location="../../../programfile/apache-tomcat-7.0.67/lib/catalina-tribes.jar"/>
+        <pathelement location="../../../programfile/apache-tomcat-7.0.67/lib/catalina.jar"/>
+        <pathelement location="../../../programfile/apache-tomcat-7.0.67/lib/ecj-4.4.2.jar"/>
+        <pathelement location="../../../programfile/apache-tomcat-7.0.67/lib/el-api.jar"/>
+        <pathelement location="../../../programfile/apache-tomcat-7.0.67/lib/jasper-el.jar"/>
+        <pathelement location="../../../programfile/apache-tomcat-7.0.67/lib/jasper.jar"/>
+        <pathelement location="../../../programfile/apache-tomcat-7.0.67/lib/jsp-api.jar"/>
+        <pathelement location="../../../programfile/apache-tomcat-7.0.67/lib/servlet-api.jar"/>
+        <pathelement location="../../../programfile/apache-tomcat-7.0.67/lib/tomcat-api.jar"/>
+        <pathelement location="../../../programfile/apache-tomcat-7.0.67/lib/tomcat-coyote.jar"/>
+        <pathelement location="../../../programfile/apache-tomcat-7.0.67/lib/tomcat-dbcp.jar"/>
+        <pathelement location="../../../programfile/apache-tomcat-7.0.67/lib/tomcat-i18n-es.jar"/>
+        <pathelement location="../../../programfile/apache-tomcat-7.0.67/lib/tomcat-i18n-fr.jar"/>
+        <pathelement location="../../../programfile/apache-tomcat-7.0.67/lib/tomcat-i18n-ja.jar"/>
+        <pathelement location="../../../programfile/apache-tomcat-7.0.67/lib/tomcat-jdbc.jar"/>
+        <pathelement location="../../../programfile/apache-tomcat-7.0.67/lib/tomcat-util.jar"/>
+        <pathelement location="../../../programfile/apache-tomcat-7.0.67/lib/tomcat7-websocket.jar"/>
+        <pathelement location="../../../programfile/apache-tomcat-7.0.67/lib/websocket-api.jar"/>
+    </path>
+    <path id="Web App Libraries.libraryclasspath">
+        <pathelement location="WebContent/WEB-INF/lib/activation-1.1.jar"/>
+        <pathelement location="WebContent/WEB-INF/lib/antlr-2.7.4.jar"/>
+        <pathelement location="WebContent/WEB-INF/lib/c3p0-0.9.1.2.jar"/>
+        <pathelement location="WebContent/WEB-INF/lib/chardet-1.0.jar"/>
+        <pathelement location="WebContent/WEB-INF/lib/commons-beanutils-1.8.3.jar"/>
+        <pathelement location="WebContent/WEB-INF/lib/commons-beanutils-core-1.8.0.jar"/>
+        <pathelement location="WebContent/WEB-INF/lib/commons-collections-3.2.1.jar"/>
+        <pathelement location="WebContent/WEB-INF/lib/commons-lang-2.6.jar"/>
+        <pathelement location="WebContent/WEB-INF/lib/commons-logging-1.1.1.jar"/>
+        <pathelement location="WebContent/WEB-INF/lib/commons-net-1.4.1.jar"/>
+        <pathelement location="WebContent/WEB-INF/lib/commons-net-3.1.jar"/>
+        <pathelement location="WebContent/WEB-INF/lib/cpdetector.jar"/>
+        <pathelement location="WebContent/WEB-INF/lib/ezmorph-1.0.6.jar"/>
+        <pathelement location="WebContent/WEB-INF/lib/hamcrest-core-1.3.jar"/>
+        <pathelement location="WebContent/WEB-INF/lib/jakarta-oro-2.0.8.jar"/>
+        <pathelement location="WebContent/WEB-INF/lib/jargs-1.0.jar"/>
+        <pathelement location="WebContent/WEB-INF/lib/jchardet-1.0.jar"/>
+        <pathelement location="WebContent/WEB-INF/lib/jersey-client-1.4.jar"/>
+        <pathelement location="WebContent/WEB-INF/lib/json-lib-2.4-jdk15.jar"/>
+        <pathelement location="WebContent/WEB-INF/lib/log4j.jar"/>
+        <pathelement location="WebContent/WEB-INF/lib/mail.jar"/>
+        <pathelement location="WebContent/WEB-INF/lib/mysql-connector-java-5.0.8-bin.jar"/>
+        <pathelement location="WebContent/WEB-INF/lib/ojdbc14.jar"/>
+        <pathelement location="WebContent/WEB-INF/lib/pinyin4j-2.5.0.jar"/>
+        <pathelement location="WebContent/WEB-INF/lib/stax-api-1.0.1.jar"/>
+    </path>
+    <path id="EAR Libraries.libraryclasspath"/>
+    <path id="JUnit 4.libraryclasspath">
+        <pathelement location="${ECLIPSE_HOME}/plugins/org.junit_4.11.0.v201303080030/junit.jar"/>
+        <pathelement location="${ECLIPSE_HOME}/plugins/org.hamcrest.core_1.3.0.v201303031735.jar"/>
+    </path>
+    <path id="mytest_tool.classpath">
+        <pathelement location="build/classes"/>
+        <path refid="Apache Tomcat v7.0 [Apache Tomcat v7.0].libraryclasspath"/>
+        <path refid="Web App Libraries.libraryclasspath"/>
+        <path refid="EAR Libraries.libraryclasspath"/>
+        <pathelement location="WebContent/WEB-INF/lib/activation-1.1.jar"/>
+        <pathelement location="WebContent/WEB-INF/lib/antlr-2.7.4.jar"/>
+        <pathelement location="WebContent/WEB-INF/lib/c3p0-0.9.1.2.jar"/>
+        <pathelement location="WebContent/WEB-INF/lib/chardet-1.0.jar"/>
+        <pathelement location="WebContent/WEB-INF/lib/commons-beanutils-1.8.3.jar"/>
+        <pathelement location="WebContent/WEB-INF/lib/commons-beanutils-core-1.8.0.jar"/>
+        <pathelement location="WebContent/WEB-INF/lib/commons-collections-3.2.1.jar"/>
+        <pathelement location="WebContent/WEB-INF/lib/commons-lang-2.6.jar"/>
+        <pathelement location="WebContent/WEB-INF/lib/commons-logging-1.1.1.jar"/>
+        <pathelement location="WebContent/WEB-INF/lib/commons-net-1.4.1.jar"/>
+        <pathelement location="WebContent/WEB-INF/lib/commons-net-3.1.jar"/>
+        <pathelement location="WebContent/WEB-INF/lib/cpdetector.jar"/>
+        <pathelement location="WebContent/WEB-INF/lib/ezmorph-1.0.6.jar"/>
+        <pathelement location="WebContent/WEB-INF/lib/hamcrest-core-1.3.jar"/>
+        <pathelement location="WebContent/WEB-INF/lib/jakarta-oro-2.0.8.jar"/>
+        <pathelement location="WebContent/WEB-INF/lib/jargs-1.0.jar"/>
+        <pathelement location="WebContent/WEB-INF/lib/jchardet-1.0.jar"/>
+        <pathelement location="WebContent/WEB-INF/lib/jersey-client-1.4.jar"/>
+        <pathelement location="WebContent/WEB-INF/lib/json-lib-2.4-jdk15.jar"/>
+        <pathelement location="WebContent/WEB-INF/lib/log4j.jar"/>
+        <pathelement location="WebContent/WEB-INF/lib/mail.jar"/>
+        <pathelement location="WebContent/WEB-INF/lib/mysql-connector-java-5.0.8-bin.jar"/>
+        <pathelement location="WebContent/WEB-INF/lib/ojdbc14.jar"/>
+        <pathelement location="WebContent/WEB-INF/lib/pinyin4j-2.5.0.jar"/>
+        <pathelement location="WebContent/WEB-INF/lib/stax-api-1.0.1.jar"/>
+        <pathelement location="WebContent/WEB-INF/lib/poi/dom4j-1.6.1.jar"/>
+        <pathelement location="WebContent/WEB-INF/lib/poi/poi-3.9-20121203.jar"/>
+        <pathelement location="WebContent/WEB-INF/lib/poi/poi-ooxml-3.9-20121203.jar"/>
+        <pathelement location="WebContent/WEB-INF/lib/poi/poi-ooxml-schemas-3.9-20121203.jar"/>
+        <pathelement location="WebContent/WEB-INF/lib/poi/poi-scratchpad-3.9-20121203.jar"/>
+        <pathelement location="WebContent/WEB-INF/lib/poi/stax-api-1.0.1.jar"/>
+        <pathelement location="WebContent/WEB-INF/lib/poi/xmlbeans-2.3.0.jar"/>
+        <path refid="JUnit 4.libraryclasspath"/>
+    </path>
+    <target name="init">
+        <mkdir dir="build/classes"/>
+        <copy includeemptydirs="false" todir="build/classes">
+            <fileset dir="src">
+                <exclude name="**/*.java"/>
+            </fileset>
+        </copy>
+    </target>
+    <target name="clean">
+        <delete dir="build/classes"/>
+    </target>
+    <target depends="clean" name="cleanall"/>
+    <target depends="build-subprojects,build-project" name="build"/>
+    <target name="build-subprojects"/>
+    <target depends="init" name="build-project">
+        <echo message="${ant.project.name}: ${ant.file}"/>
+        <javac debug="true" debuglevel="${debuglevel}" destdir="build/classes" includeantruntime="false" source="${source}" target="${target}">
+            <src path="src"/>
+            <classpath refid="mytest_tool.classpath"/>
+        </javac>
+    </target>
+    <target description="Build all projects which reference this project. Useful to propagate changes." name="build-refprojects"/>
+    <target description="copy Eclipse compiler jars to ant lib directory" name="init-eclipse-compiler">
+        <copy todir="${ant.library.dir}">
+            <fileset dir="${ECLIPSE_HOME}/plugins" includes="org.eclipse.jdt.core_*.jar"/>
+        </copy>
+        <unzip dest="${ant.library.dir}">
+            <patternset includes="jdtCompilerAdapter.jar"/>
+            <fileset dir="${ECLIPSE_HOME}/plugins" includes="org.eclipse.jdt.core_*.jar"/>
+        </unzip>
+    </target>
+    <target description="compile project with Eclipse compiler" name="build-eclipse-compiler">
+        <property name="build.compiler" value="org.eclipse.jdt.core.JDTCompilerAdapter"/>
+        <antcall target="build"/>
+    </target>
+    <target name="BufferIO.testIO">
+        <mkdir dir="${junit.output.dir}"/>
+        <junit fork="yes" printsummary="withOutAndErr">
+            <formatter type="xml"/>
+            <test name="cn.six.myio.BufferIO" todir="${junit.output.dir}"/>
+            <classpath refid="mytest_tool.classpath"/>
+        </junit>
+    </target>
+    <target name="Child">
+        <java classname="cn.six.test.duotai.Child" failonerror="true" fork="yes">
+            <classpath refid="mytest_tool.classpath"/>
+        </java>
+    </target>
+    <target name="DeepString">
+        <java classname="cn.six.mystring.DeepString" failonerror="true" fork="yes">
+            <classpath refid="mytest_tool.classpath"/>
+        </java>
+    </target>
+    <target name="Jprofiler">
+        <java classname="cn.six.test.javaTool.Jprofiler" failonerror="true" fork="yes">
+            <classpath refid="mytest_tool.classpath"/>
+        </java>
+    </target>
+    <target name="KeyListenerTest">
+        <java classname="jx3.KeyListenerTest" failonerror="true" fork="yes">
+            <classpath refid="mytest_tool.classpath"/>
+        </java>
+    </target>
+    <target name="ListTest.test01">
+        <mkdir dir="${junit.output.dir}"/>
+        <junit fork="yes" printsummary="withOutAndErr">
+            <formatter type="xml"/>
+            <test name="cn.six.mycollection.ListTest" todir="${junit.output.dir}"/>
+            <classpath refid="mytest_tool.classpath"/>
+        </junit>
+    </target>
+    <target name="ListTest.test3">
+        <mkdir dir="${junit.output.dir}"/>
+        <junit fork="yes" printsummary="withOutAndErr">
+            <formatter type="xml"/>
+            <test name="cn.six.mycollection.ListTest" todir="${junit.output.dir}"/>
+            <classpath refid="mytest_tool.classpath"/>
+        </junit>
+    </target>
+    <target name="ListTest.testListType">
+        <mkdir dir="${junit.output.dir}"/>
+        <junit fork="yes" printsummary="withOutAndErr">
+            <formatter type="xml"/>
+            <test name="cn.six.mycollection.ListTest" todir="${junit.output.dir}"/>
+            <classpath refid="mytest_tool.classpath"/>
+        </junit>
+    </target>
+    <target name="Main (3)">
+        <java classname="cn.six.designpattern.singleton.Main" failonerror="true" fork="yes">
+            <classpath refid="mytest_tool.classpath"/>
+        </java>
+    </target>
+    <target name="Main (6)">
+        <java classname="jx3.Main" failonerror="true" fork="yes">
+            <classpath refid="mytest_tool.classpath"/>
+        </java>
+    </target>
+    <target name="MainT">
+        <java classname="cn.six.test.MainT" failonerror="true" fork="yes">
+            <classpath refid="mytest_tool.classpath"/>
+        </java>
+    </target>
+    <target name="MapTest (1)">
+        <java classname="cn.six.mycollection.MapTest" failonerror="true" fork="yes">
+            <classpath refid="mytest_tool.classpath"/>
+        </java>
+    </target>
+    <target name="MapTest">
+        <mkdir dir="${junit.output.dir}"/>
+        <junit fork="yes" printsummary="withOutAndErr">
+            <formatter type="xml"/>
+            <test name="cn.six.mycollection.MapTest" todir="${junit.output.dir}"/>
+            <classpath refid="mytest_tool.classpath"/>
+        </junit>
+    </target>
+    <target name="MapTest.linkedHashMap">
+        <mkdir dir="${junit.output.dir}"/>
+        <junit fork="yes" printsummary="withOutAndErr">
+            <formatter type="xml"/>
+            <test name="cn.six.mycollection.MapTest" todir="${junit.output.dir}"/>
+            <classpath refid="mytest_tool.classpath"/>
+        </junit>
+    </target>
+    <target name="MapTest.testMapSize (1)">
+        <mkdir dir="${junit.output.dir}"/>
+        <junit fork="yes" printsummary="withOutAndErr">
+            <formatter type="xml"/>
+            <test name="cn.six.mycollection.MapTest" todir="${junit.output.dir}"/>
+            <classpath refid="mytest_tool.classpath"/>
+        </junit>
+    </target>
+    <target name="MapTest.testmymap">
+        <mkdir dir="${junit.output.dir}"/>
+        <junit fork="yes" printsummary="withOutAndErr">
+            <formatter type="xml"/>
+            <test name="cn.six.mycollection.MapTest" todir="${junit.output.dir}"/>
+            <classpath refid="mytest_tool.classpath"/>
+        </junit>
+    </target>
+    <target name="MapTest.testweakHashMap">
+        <mkdir dir="${junit.output.dir}"/>
+        <junit fork="yes" printsummary="withOutAndErr">
+            <formatter type="xml"/>
+            <test name="cn.six.mycollection.MapTest" todir="${junit.output.dir}"/>
+            <classpath refid="mytest_tool.classpath"/>
+        </junit>
+    </target>
+    <target name="OomTest">
+        <java classname="cn.six.test.javaTool.OomTest" failonerror="true" fork="yes">
+            <jvmarg line="-Xms20m -Xmx20m -XX:+HeapDumpOnOutOfMemoryError"/>
+            <classpath refid="mytest_tool.classpath"/>
+        </java>
+    </target>
+    <target name="StringTest1.test05">
+        <mkdir dir="${junit.output.dir}"/>
+        <junit fork="yes" printsummary="withOutAndErr">
+            <formatter type="xml"/>
+            <test name="cn.six.mystring.StringTest1" todir="${junit.output.dir}"/>
+            <classpath refid="mytest_tool.classpath"/>
+        </junit>
+    </target>
+    <target name="Test5">
+        <java classname="cn.six.mycollection.Test5" failonerror="true" fork="yes">
+            <classpath refid="mytest_tool.classpath"/>
+        </java>
+    </target>
+    <target name="TestClassUtil.test">
+        <mkdir dir="${junit.output.dir}"/>
+        <junit fork="yes" printsummary="withOutAndErr">
+            <formatter type="xml"/>
+            <test name="com.opslab.test.TestClassUtil" todir="${junit.output.dir}"/>
+            <classpath refid="mytest_tool.classpath"/>
+        </junit>
+    </target>
+    <target name="TestDateUtils.testDateTime">
+        <mkdir dir="${junit.output.dir}"/>
+        <junit fork="yes" printsummary="withOutAndErr">
+            <formatter type="xml"/>
+            <test name="com.opslab.test.TestDateUtils" todir="${junit.output.dir}"/>
+            <classpath refid="mytest_tool.classpath"/>
+        </junit>
+    </target>
+    <target name="TestEmailUtils.TestDoSendHtmlEmail">
+        <mkdir dir="${junit.output.dir}"/>
+        <junit fork="yes" printsummary="withOutAndErr">
+            <formatter type="xml"/>
+            <test name="com.opslab.test.TestEmailUtils" todir="${junit.output.dir}"/>
+            <classpath refid="mytest_tool.classpath"/>
+        </junit>
+    </target>
+    <target name="TestFileUtils.testCopy">
+        <mkdir dir="${junit.output.dir}"/>
+        <junit fork="yes" printsummary="withOutAndErr">
+            <formatter type="xml"/>
+            <test name="com.opslab.test.TestFileUtils" todir="${junit.output.dir}"/>
+            <classpath refid="mytest_tool.classpath"/>
+        </junit>
+    </target>
+    <target name="TestFileUtils.testCreateFiles">
+        <mkdir dir="${junit.output.dir}"/>
+        <junit fork="yes" printsummary="withOutAndErr">
+            <formatter type="xml"/>
+            <test name="com.opslab.test.TestFileUtils" todir="${junit.output.dir}"/>
+            <classpath refid="mytest_tool.classpath"/>
+        </junit>
+    </target>
+    <target name="TestFileUtils.testListFile">
+        <mkdir dir="${junit.output.dir}"/>
+        <junit fork="yes" printsummary="withOutAndErr">
+            <formatter type="xml"/>
+            <test name="com.opslab.test.TestFileUtils" todir="${junit.output.dir}"/>
+            <classpath refid="mytest_tool.classpath"/>
+        </junit>
+    </target>
+    <target name="TestNio.nioCopyFile">
+        <mkdir dir="${junit.output.dir}"/>
+        <junit fork="yes" printsummary="withOutAndErr">
+            <formatter type="xml"/>
+            <test name="cn.six.nio.TestNio" todir="${junit.output.dir}"/>
+            <classpath refid="mytest_tool.classpath"/>
+        </junit>
+    </target>
+    <target name="TestNio.testdup">
+        <mkdir dir="${junit.output.dir}"/>
+        <junit fork="yes" printsummary="withOutAndErr">
+            <formatter type="xml"/>
+            <test name="cn.six.nio.TestNio" todir="${junit.output.dir}"/>
+            <classpath refid="mytest_tool.classpath"/>
+        </junit>
+    </target>
+    <target name="TestNio.testNioPar">
+        <mkdir dir="${junit.output.dir}"/>
+        <junit fork="yes" printsummary="withOutAndErr">
+            <formatter type="xml"/>
+            <test name="cn.six.nio.TestNio" todir="${junit.output.dir}"/>
+            <classpath refid="mytest_tool.classpath"/>
+        </junit>
+    </target>
+    <target name="TestPropertiesUtils.test_GetValueByKey">
+        <mkdir dir="${junit.output.dir}"/>
+        <junit fork="yes" printsummary="withOutAndErr">
+            <formatter type="xml"/>
+            <test name="com.opslab.test.TestPropertiesUtils" todir="${junit.output.dir}"/>
+            <classpath refid="mytest_tool.classpath"/>
+        </junit>
+    </target>
+    <target name="TestRandomUtil.test_integer">
+        <mkdir dir="${junit.output.dir}"/>
+        <junit fork="yes" printsummary="withOutAndErr">
+            <formatter type="xml"/>
+            <test name="com.opslab.test.TestRandomUtil" todir="${junit.output.dir}"/>
+            <classpath refid="mytest_tool.classpath"/>
+        </junit>
+    </target>
+    <target name="TestRandomUtil.test_integer2">
+        <mkdir dir="${junit.output.dir}"/>
+        <junit fork="yes" printsummary="withOutAndErr">
+            <formatter type="xml"/>
+            <test name="com.opslab.test.TestRandomUtil" todir="${junit.output.dir}"/>
+            <classpath refid="mytest_tool.classpath"/>
+        </junit>
+    </target>
+    <target name="TestStringUtils.test1">
+        <mkdir dir="${junit.output.dir}"/>
+        <junit fork="yes" printsummary="withOutAndErr">
+            <formatter type="xml"/>
+            <test name="cn.six.test.commonlang.TestStringUtils" todir="${junit.output.dir}"/>
+            <classpath refid="mytest_tool.classpath"/>
+        </junit>
+    </target>
+    <target name="TestStringUtils.test_cpDetector">
+        <mkdir dir="${junit.output.dir}"/>
+        <junit fork="yes" printsummary="withOutAndErr">
+            <formatter type="xml"/>
+            <test name="com.opslab.test.TestStringUtils" todir="${junit.output.dir}"/>
+            <classpath refid="mytest_tool.classpath"/>
+        </junit>
+    </target>
+    <target name="TestStringUtils.test_replaceBlank">
+        <mkdir dir="${junit.output.dir}"/>
+        <junit fork="yes" printsummary="withOutAndErr">
+            <formatter type="xml"/>
+            <test name="com.opslab.test.TestStringUtils" todir="${junit.output.dir}"/>
+            <classpath refid="mytest_tool.classpath"/>
+        </junit>
+    </target>
+    <target name="testt.testExplorer">
+        <mkdir dir="${junit.output.dir}"/>
+        <junit fork="yes" printsummary="withOutAndErr">
+            <formatter type="xml"/>
+            <test name="tt.testt" todir="${junit.output.dir}"/>
+            <classpath refid="mytest_tool.classpath"/>
+        </junit>
+    </target>
+    <target name="Test_generic.test01 (1)">
+        <mkdir dir="${junit.output.dir}"/>
+        <junit fork="yes" printsummary="withOutAndErr">
+            <formatter type="xml"/>
+            <test name="cn.six.test.Test_generic" todir="${junit.output.dir}"/>
+            <classpath refid="mytest_tool.classpath"/>
+        </junit>
+    </target>
+    <target name="Thread01">
+        <java classname="cn.six.thread.Thread01" failonerror="true" fork="yes">
+            <classpath refid="mytest_tool.classpath"/>
+        </java>
+    </target>
+    <target name="ThreadStart (3)">
+        <java classname="cn.six.designpattern.singleton.ThreadStart" failonerror="true" fork="yes">
+            <classpath refid="mytest_tool.classpath"/>
+        </java>
+    </target>
+    <target name="junitreport">
+        <junitreport todir="${junit.output.dir}">
+            <fileset dir="${junit.output.dir}">
+                <include name="TEST-*.xml"/>
+            </fileset>
+            <report format="frames" todir="${junit.output.dir}"/>
+        </junitreport>
+    </target>
+</project>
