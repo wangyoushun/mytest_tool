@@ -1,16 +1,105 @@
 package cn.six.mystring;
 
+import static org.junit.Assert.*;
+
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
+import java.io.IOException;
 import java.lang.reflect.Array;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
+import java.util.List;
 
 import org.apache.commons.lang.StringUtils;
 import org.junit.Test;
 
+import com.opslab.FileUtil;
+
+import tt.testt;
+
 public class StringTest1 {
 
+	 public static List<String> lines(File file) {
+	        List<String> list = new ArrayList<>();
+	        try {
+	                BufferedReader reader = new BufferedReader(new FileReader(file));
+	   
+	            String line;
+	            while ((line = reader.readLine()) != null) {
+	                list.add(line);
+	            }
+	        } catch (IOException e) {
+	            e.printStackTrace();
+	        }
+	        return list;
+	    }
+
+	
+	//sql 以java字符串形式连接
+		@Test
+		public void convertUpperCase() throws Exception {
+			List<String> lines = FileUtil.lines(new File("e://test.txt"));
+			for (String string : lines) {
+				System.out.println(string.toUpperCase());
+			}
+		}
+	
+	//sql 以java字符串形式连接
+	@Test
+	public void sqlToStr() throws Exception {
+		List<String> lines = FileUtil.lines(new File("e://test.txt"));
+		for (String string : lines) {
+			System.out.println("+\" "+string.trim()+"\" ");
+		}
+	}
+	
+	/*
+	 * 从文件读取数据，驼峰转为下划线，增加javatype
+	 */
+	@Test
+	public void testName1() throws Exception {
+		List<String> lines = FileUtil.lines(new File("e://test.txt"));
+		System.out.println(lines);
+		String str="";
+		for (String string : lines) {
+			String[] split = string.split(" ");
+			str=str+"#{"+underlineToCamel(split[0])+",jdbcType="+split[1].toUpperCase()+"},";
+//			System.out.println(string);
+		}
+		System.out.println(str);
+	}
+	
+	/*
+	 * 从文件读取数据，驼峰转为下划线
+	 */
+	@SuppressWarnings("resource")
+	@Test
+	public void testName2() throws Exception {
+		List<String> lines = FileUtil.lines(new File("e://test.txt"));
+		System.out.println(lines);
+		for (String string : lines) {
+			String underlineToCamel = camelTounderline(string);
+			System.out.println(underlineToCamel);
+		}
+	}
+	/*
+	 * 从文件读取数据，下划线字符串转为驼峰
+	 */
+	@SuppressWarnings("resource")
+	@Test
+	public void testName() throws Exception {
+		List<String> lines = FileUtil.lines(new File("e://test.txt"));
+		System.out.println(lines);
+		for (String string : lines) {
+			String underlineToCamel = underlineToCamel(string);
+			System.out.println(underlineToCamel);
+		}
+	}
+	
 	@Test
 	public void test05() {
 		String tickNo = "781455678||";
@@ -85,5 +174,49 @@ public class StringTest1 {
 		if (str.contains("."))
 			str = str.substring(0, str.indexOf("."));
 		System.out.println(str);
+	}
+	
+	public static String underlineToCamel(String param) {
+		char ch = '_';
+		if (param == null || "".equals(param.trim())) {
+			return "";
+		}
+		int len = param.length();
+		StringBuilder sb = new StringBuilder(len);
+		for (int i = 0; i < len; i++) {
+			char c = param.charAt(i);
+			if (c == ch) {
+				if (++i < len) {
+					sb.append(Character.toUpperCase(param.charAt(i)));
+				}
+			} else {
+				sb.append(c);
+			}
+		}
+		return sb.toString();
+	}
+	
+	public static String camelTounderline(String param) {
+		// a-z：97-122
+		// A-Z：65-90
+		// 0-9：48-57
+		if (param == null || "".equals(param.trim())) {
+			return "";
+		}
+		int len = param.length();
+		StringBuilder sb = new StringBuilder(len);
+		for (int i = 0; i < len; i++) {
+			char c = param.charAt(i);
+
+			if (i > 0 && c >= 65 && c <= 90) { // 大写字符
+				if (i < len) {
+					sb.append("_");
+					sb.append(Character.toLowerCase(param.charAt(i)));
+				}
+			} else {
+				sb.append(c);
+			}
+		}
+		return sb.toString().toUpperCase();
 	}
 }

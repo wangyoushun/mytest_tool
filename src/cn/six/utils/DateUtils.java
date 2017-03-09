@@ -1,5 +1,8 @@
 package cn.six.utils;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -52,6 +55,20 @@ public class DateUtils {
 	        }
 	    }
 	    return null; // Unknown format.
+	}
+	
+	public static Date strConvertDate(String str){
+		String determineDateFormat = determineDateFormat(str);
+		if(determineDateFormat==null)
+			return null;
+		
+		Date parse=null;
+		try {
+			 parse = new SimpleDateFormat(determineDateFormat).parse(str);
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
+		return parse;
 	}
 	
 	@Test

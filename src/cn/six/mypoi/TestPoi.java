@@ -1,5 +1,7 @@
 package cn.six.mypoi;
 
+import static org.junit.Assert.*;
+
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -11,6 +13,8 @@ import org.apache.poi.xssf.usermodel.XSSFRow;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.junit.Test;
+
+import tt.testt;
 
 public class TestPoi {
 
@@ -44,6 +48,15 @@ public class TestPoi {
 			s += stringCellValue;
 		}
 		return s;
+	}
+	
+	@Test
+	public void test2() throws Exception {
+		String path = "e:/test3.xlsx";
+		List<String> readExcel = ExcelUtils.readExcel(path);
+		for (String string : readExcel) {
+			System.out.println(string);
+		}
 	}
 	
 	@Test

@@ -91,4 +91,14 @@ public class ZIPUtil {
             e.printStackTrace();
         }
     }
+    
+    public static void main(String[] args) {
+    	try {
+			deCompress(new File("d://test"),"d:/test.zip");
+			System.out.println("zip");
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
 }

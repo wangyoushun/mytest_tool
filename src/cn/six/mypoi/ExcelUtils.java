@@ -4,13 +4,10 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.lang.annotation.Annotation;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 
@@ -29,7 +26,46 @@ public class ExcelUtils {
 	private final static int starSheet = 0;
 	private static List<String> colList = new ArrayList<String>();
 
-	public static <E> List<E> readExcel(String path, Class clazz,
+	public static List<String> readExcel(String path) throws Exception {
+		if (path == null || "".equals(path))
+			return null;
+
+		File file = new File(path);
+		if (!file.exists())
+			return null;
+		Workbook work = null;
+		InputStream in = new FileInputStream(file);
+		List<String> rowList = new ArrayList<String>();
+		String suffix = path.substring(path.lastIndexOf(".") + 1);
+		try {
+			work = createWork(work, in, suffix);
+			Sheet sheet = work.getSheetAt(starSheet);
+			int rows = sheet.getLastRowNum() + 1;
+			if (rows < 1)
+				return null;
+
+			String str = "";
+			int cols = sheet.getRow(0).getPhysicalNumberOfCells();
+			for (int i = 1; i < rows; i++) {
+				str="";
+				Row row = sheet.getRow(i);
+				for (int j = 0; j < cols; j++) {
+					Cell cell = row.getCell(j);
+					str += cell.getStringCellValue() + ",";
+				}
+				if(str.length()>1)
+					str=str.substring(0,str.length()-1);
+				
+				rowList.add(str);
+			}
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return rowList;
+	}
+
+	public static <E> List<E> readExcel(String path, Class<?> clazz,
 			String[] excludeFiled) throws Exception {
 		if (path == null || "".equals(path))
 			return null;
@@ -41,8 +77,6 @@ public class ExcelUtils {
 		Workbook work = null;
 		InputStream in = new FileInputStream(file);
 		List<E> list = new ArrayList<E>();
-		// List<String> headList = new ArrayList<String>();
-
 		String suffix = path.substring(path.lastIndexOf(".") + 1);
 		System.out.println(suffix);
 		try {
