@@ -8,8 +8,12 @@ CREATE TABLE `job` (
   `create_time` varchar(20) DEFAULT NULL COMMENT '发布时间',
   `input_time` datetime DEFAULT NULL,
   `area` varchar(10) DEFAULT NULL,
+  `experience` varchar(20) DEFAULT NULL,
+  `education` varchar(10) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+
 
 
 
@@ -26,5 +30,24 @@ CREATE TABLE `job_detail` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+
+====================
+
+
+delete t1 from job  t1
+RIGHT JOIN join 
+(SELECT
+	min(t.id) id
+FROM
+	job t
+GROUP BY
+	t.title,
+	t.company_name,
+	t.money_left,
+	t.money_right,
+	t.create_time
+having count(1)>1) t
+on t1.id=t.id;
+======================
 
 

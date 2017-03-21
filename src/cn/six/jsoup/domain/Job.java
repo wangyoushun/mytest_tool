@@ -15,12 +15,14 @@ public class Job {
 
 	private Integer id;
 	private String title; // 职位标题
-	private String companyNname; // 公司名称
+	private String companyName; // 公司名称
 	private String industry; // 介绍
 	private Integer moneyLeft; // 最低工资
 	private Integer moneyRight; // 最高工资
 	private String createTime; // 发布时间
-	private String area;
+	private String area;  //地区
+	private String experience; //经验
+	private String education;  //学历
 	private Date inputTime;
 
 	public Integer getId() {
@@ -39,12 +41,14 @@ public class Job {
 		this.title = title;
 	}
 
-	public String getCompanyNname() {
-		return companyNname;
+	
+
+	public String getCompanyName() {
+		return companyName;
 	}
 
-	public void setCompanyNname(String companyNname) {
-		this.companyNname = companyNname;
+	public void setCompanyName(String companyName) {
+		this.companyName = companyName;
 	}
 
 	public String getIndustry() {
@@ -95,13 +99,30 @@ public class Job {
 		this.area = area;
 	}
 
+	public String getExperience() {
+		return experience;
+	}
+
+	public void setExperience(String experience) {
+		this.experience = experience;
+	}
+
+	public String getEducation() {
+		return education;
+	}
+
+	public void setEducation(String education) {
+		this.education = education;
+	}
+
+	
 	@Override
 	public String toString() {
-		return "Job [id=" + id + ", title=" + title + ", companyNname="
-				+ companyNname + ", industry=" + industry + ", moneyLeft="
+		return "Job [id=" + id + ", title=" + title + ", companyName="
+				+ companyName + ", industry=" + industry + ", moneyLeft="
 				+ moneyLeft + ", moneyRight=" + moneyRight + ", createTime="
-				+ createTime + ", area=" + area + ", inputTime=" + inputTime
-				+ "]";
+				+ createTime + ", area=" + area + ", experience=" + experience
+				+ ", education=" + education + ", inputTime=" + inputTime + "]";
 	}
 
 }
