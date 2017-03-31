@@ -4,6 +4,8 @@ import java.sql.Connection;
 import java.util.Date;
 import java.util.concurrent.BlockingQueue;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.jsoup.Jsoup;
 import org.jsoup.helper.StringUtil;
 import org.jsoup.nodes.Document;
@@ -13,36 +15,41 @@ import org.jsoup.select.Elements;
 import cn.six.jsoup.domain.Job;
 import cn.six.jsoup.util.DBUtil;
 
-public class JobThread implements Runnable{
+public class JobThread implements Runnable {
 
-	private  BlockingQueue<String> queue;
+	private BlockingQueue<String> queue;
 	private String url;
-	
+	private static final Log log = LogFactory.getLog(JobThread.class);
+
 	public JobThread(BlockingQueue<String> queue, String url) {
 		super();
 		this.queue = queue;
-		this.url=url;
+		this.url = url;
 	}
 
 	@Override
 	public void run() {
-			try {
-					getJob();	
-			} catch (Exception e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
+		try {
+			getJob();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 
+	/**
+	 * 获取工作职位信息
+	 * @throws Exception
+	 */
 	public void getJob() throws Exception {
-		Connection con=null;
-//		Document doc = Jsoup.connect(url).data("query", "Java")
-//				.userAgent("Mozilla").cookie("auth", "token").timeout(3000)
-//				.post();
-		 Document doc = Jsoup.connect(url).proxy("218.82.112.4",
-				 8118).userAgent("Mozilla").timeout(30000).get();
+		Connection con = null;
+		// Document doc = Jsoup.connect(url).data("query", "Java")
+		// .userAgent("Mozilla").cookie("auth", "token").timeout(3000)
+		// .post();
+		Document doc = Jsoup.connect(url).proxy("115.29.2.139", 80)
+				.userAgent("Mozilla").timeout(30000).get();
+
 		Thread.sleep(1000);
-//		System.out.println(doc.title());
+		// System.out.println(doc.title());
 		Elements divE = doc
 				.select("#s_position_list > ul > li > div.list_item_top");
 		for (Element element : divE) {
@@ -52,7 +59,7 @@ public class JobThread implements Runnable{
 			Elements emE = aE.select("span > em");
 			job.setTitle(h2E.text());
 			job.setArea(emE.text());
-			
+
 			Elements spanE = element.select("div.position > div.p_top > span");
 			job.setCreateTime(spanE.text());
 
@@ -71,34 +78,47 @@ public class JobThread implements Runnable{
 
 			String text = split2[0];
 
-			if (!StringUtil.isBlank(text)) {
-				String[] split = text.split("-");
-				split[0] = split[0].substring(0,split[0].length()-1);
-				split[1] = split[1].substring(0,split[1].length()-1);
-				try {
-					job.setMoneyLeft(Integer.parseInt(split[0]));
-					job.setMoneyRight(Integer.parseInt(split[1]));
-				} catch (Exception e) {
-					System.out.println("==========="+split[0]+","+split[1]);
-					e.printStackTrace();
-				}
+			Integer[] validataMoney = validataMoney(text);
+			if(validataMoney!=null){
+				job.setMoneyLeft(validataMoney[0]);
+				job.setMoneyRight(validataMoney[1]);
 			}
-		
 			job.setInputTime(new Date());
-//			System.out.println(job);
-			
-			//save job
+			// save job
 			con = DBUtil.openConnection();
 			Integer jobId = DBUtil.saveReturnKey(con, job);
 			con.close();
-			
-			String substring = aE.attr("href").substring(2);
-			System.out.println("put  size "+queue.size());
-//			queue.put("https://"+substring+"-"+1);
-			
-			queue.put("https://"+substring+"-"+jobId);
-			
+			String substring = aE.attr("href");
+			System.out.println("put  size " + queue.size());
+			queue.put(substring + "-" + jobId);
 		}
 	}
-	
+
+	/**
+	 * 校验工资
+	 * @param text
+	 * @return
+	 */
+	public Integer[] validataMoney(String text) {
+		Integer[] moneyArray = null;
+		if (!StringUtil.isBlank(text)) {
+			String[] split = text.split("-");
+			if (split.length > 1) {
+				if (split[0].length() > 1 && split[1].length() > 1) {
+					split[0] = split[0].substring(0, split[0].length() - 1);
+					split[1] = split[1].substring(0, split[1].length() - 1);
+					moneyArray = new Integer[2];
+					try {
+						moneyArray[0] = Integer.parseInt(split[0]);
+						moneyArray[1] = Integer.parseInt(split[1]);
+					} catch (NumberFormatException e) {
+						log.error("error---money format error"+e.getMessage());
+						return null;
+					}
+				}
+			}
+		}
+		return moneyArray;
+	}
+
 }

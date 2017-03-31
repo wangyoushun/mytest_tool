@@ -13,6 +13,7 @@ import cn.six.jsoup.util.DBUtil;
 public class JobDetailThread implements Runnable {
 
 	private BlockingQueue<String> queue;
+//	private static final Log log = LogFactory.getLog(JobDetailThread.class);
 
 	public JobDetailThread() {
 		super();
@@ -27,11 +28,8 @@ public class JobDetailThread implements Runnable {
 	public void run() {
 		while (true) {
 			try {
-
 				getJobDetail();
-
 			} catch (Exception e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		}
@@ -46,29 +44,25 @@ public class JobDetailThread implements Runnable {
 //		Document doc = Jsoup.connect(url).data("query", "Java")
 //				.userAgent("Mozilla").cookie("auth", "token").timeout(3000)
 //				.post();
-		 Document doc = Jsoup.connect(url).proxy("218.82.112.4",
-				 8118).userAgent("Mozilla").timeout(30000).get();
+		System.out.println(url);
+		 Document doc = Jsoup.connect(url).proxy("115.29.2.139",
+				 80).userAgent("Mozilla").timeout(30000).get();
+		 Thread.sleep(1000);
 		JobInfo jobInfo = new JobInfo();
 		jobInfo.setJobId(Integer.parseInt(split[1]));
-
 		String jobAdvantage = doc.select("#job_detail > dd.job-advantage > p")
 				.text();
 		jobInfo.setJobAdvantage(jobAdvantage);
-
 		String description = doc.select("#job_detail > dd.job_bt > div").text();
 		jobInfo.setDescription(description);
-
 		String address = doc.select(
 				"#job_detail > dd.job-address.clearfix > div.work_addr").text();
 		jobInfo.setAddress(address);
-
 		String hrName = doc.select(
 				"#job_detail > dd.jd_publisher > div > div.publisher_name > a")
 				.text();
 		jobInfo.setHrName(hrName);
-
 		System.out.println(jobInfo);
-		// System.out.println("url"+url);
 		System.out.println(Thread.currentThread().getName() + "  get  "
 				+ queue.size());
 		con = DBUtil.openConnection();

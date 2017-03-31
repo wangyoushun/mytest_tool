@@ -36,37 +36,34 @@ public class ParseLg {
 	public static void main(String[] args) {
 
 		ParseLg parseLg = new ParseLg();
-		// System.setProperty("http.maxRedirects", "50");
-		// System.getProperties().setProperty("proxySet", "true");
-		// // 如果不设置，只要代理IP和代理端口正确,此项不设置也可以
-		// String ip = "218.82.112.4";
-		// System.getProperties().setProperty("http.proxyHost", ip);
-		// System.getProperties().setProperty("http.proxyPort", "8118");
-		// String property = System.getProperty("http.proxyHost");
-
-			// parseLg.getJob();
-			parseLg.getMain();
-			
+		parseLg.getMain();
 
 	}
 
 	public void getMain() {
 		System.out.println("job main start------------------------");
 		int cpuNum = Runtime.getRuntime().availableProcessors();
-		ExecutorService jobThreadPool = Executors.newFixedThreadPool(2);
+		ExecutorService jobThreadPool = Executors.newFixedThreadPool(cpuNum/2);
+		ExecutorService jobInfoThreadPool = Executors.newFixedThreadPool(cpuNum);
 
 		List<String> pageList = getPageList();
 
 		for (String strulr : pageList) {
 			jobThreadPool.execute(new JobThread(queue, strulr));
 		}
-		new Thread(new JobDetailThread(queue)).start();
-		new Thread(new JobDetailThread(queue)).start();
-		new Thread(new JobDetailThread(queue)).start();
-		new Thread(new JobDetailThread(queue)).start();
+		
+		for(int i=0; i<cpuNum; i++){
+			jobInfoThreadPool.execute(new JobDetailThread(queue));
+		}
 
 		jobThreadPool.shutdown();
+		jobInfoThreadPool.shutdown();
 		System.out.println("job main end------------------------");
+		
+//		new Thread(new JobDetailThread(queue)).start();
+//		new Thread(new JobDetailThread(queue)).start();
+//		new Thread(new JobDetailThread(queue)).start();
+//		new Thread(new JobDetailThread(queue)).start();
 	}
 
 	// https://www.lagou.com/zhaopin/Java/20/
@@ -84,12 +81,13 @@ public class ParseLg {
 		return pageList;
 	}
 
+	@Test
 	public void getJob() throws IOException {
-		// Document doc = Jsoup.connect(url).proxy("218.82.112.4", 8118)
-		// .userAgent("Mozilla").timeout(30000).get();
-		Document doc = Jsoup.connect(url).data("query", "Java")
-				.userAgent("Mozilla").cookie("auth", "token").timeout(30000)
-				.get();
+		 Document doc = Jsoup.connect(url).proxy("115.29.2.139",
+				 80).userAgent("Mozilla").timeout(30000).get();
+//		Document doc = Jsoup.connect(url).data("query", "Java")
+//				.userAgent("Mozilla").cookie("auth", "token").timeout(30000)
+//				.get();
 		System.out.println(doc.title());
 		Elements divE = doc
 				.select("#s_position_list > ul > li > div.list_item_top");
@@ -100,7 +98,8 @@ public class ParseLg {
 			Elements emE = aE.select("span > em");
 			job.setTitle(h2E.text());
 			job.setArea(emE.text());
-			String substring = aE.attr("href").substring(2);
+			String substring = aE.attr("href");
+		
 
 			System.out.println(substring);
 
@@ -193,11 +192,11 @@ class TestThread implements Runnable {
 	@Override
 	public void run() {
 		try {
-			// Document doc = Jsoup.connect(url).proxy("218.82.112.4", 8118)
-			// .userAgent("Mozilla").timeout(30000).get();
-			Document doc = Jsoup.connect(url).data("query", "Java")
-					.userAgent("Mozilla").cookie("auth", "token")
-					.timeout(30000).get();
+			Document doc = Jsoup.connect(url).proxy("218.82.112.4", 8118)
+					.userAgent("Mozilla").timeout(30000).get();
+			// Document doc = Jsoup.connect(url).data("query", "Java")
+			// .userAgent("Mozilla").cookie("auth", "token")
+			// .timeout(30000).get();
 			System.out.println(doc.title());
 			Elements divE = doc
 					.select("#s_position_list > ul > li > div.list_item_top");
@@ -248,6 +247,3 @@ class TestThread implements Runnable {
 	}
 
 }
-
-// /#s_position_list > ul > li:nth-child(14) > div.list_item_top > div.position
-// > div.p_top > a

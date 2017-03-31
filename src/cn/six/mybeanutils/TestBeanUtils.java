@@ -1,12 +1,10 @@
 package cn.six.mybeanutils;
 
 
-import java.lang.reflect.InvocationTargetException;
 import java.util.HashMap;
 import java.util.Map;
 
 import org.apache.commons.beanutils.BeanUtils;
-import org.apache.commons.collections.map.HashedMap;
 import org.junit.Test;
 
 public class TestBeanUtils {
@@ -50,13 +48,6 @@ public class TestBeanUtils {
 		
 	}
 	
-	public static void main(String[] args) throws Exception {
-		Student student = new Student();
-		student.setAge(1);
-		
-		String property = BeanUtils.getProperty(student, "age");
-		System.out.println(property);
-		
-	}
+
 }
 
