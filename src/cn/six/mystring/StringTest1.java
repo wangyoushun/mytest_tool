@@ -19,7 +19,6 @@ import org.junit.Test;
 
 import com.opslab.FileUtil;
 
-import tt.testt;
 
 public class StringTest1 {
 

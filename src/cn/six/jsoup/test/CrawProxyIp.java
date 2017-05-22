@@ -12,7 +12,6 @@ import org.jsoup.nodes.Document;
 import org.jsoup.select.Elements;
 import org.junit.Test;
 
-import tt.testt;
 import cn.six.utils.FileUtil;
 
 public class CrawProxyIp {
