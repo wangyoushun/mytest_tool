@@ -1,5 +1,6 @@
 package cn.six.utils.test;
 
+
 import java.io.File;
 import java.util.Arrays;
 import java.util.List;
@@ -9,6 +10,12 @@ import org.junit.Test;
 import cn.six.utils.FileUtil;
 
 public class FileUtilTest {
+	
+	@Test
+	public void fileCopyTest() throws Exception {
+		String path="D:\\tmp";
+		FileUtil.copyFile(new File(path),"D:/tmp02");
+	}
 	
 	//将list 写入文件中
 	@Test
