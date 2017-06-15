@@ -13,6 +13,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class FileUtil {
+	
+	private static final String ENCODE_GBK="GBK";
+	private static final String ENCODE_UTF8="UTF-8";
+	
 	/**
 	 * 以列表的方式获取文件的所有行
 	 *
@@ -93,7 +97,11 @@ public class FileUtil {
 		return false;
 	}
 
-
+	/**
+	 * 文件拷贝
+	 * @param s
+	 * @param t
+	 */
 	public static void fileChannelCopy(File s, File t) {
 		FileInputStream fi = null;
 		FileOutputStream fo = null;
@@ -144,4 +152,21 @@ public class FileUtil {
 		}
 	}
 
+	/**
+	 * 
+	* @Title: jsonStrToJavaJsonStr 
+	* @Description: 将json串转化为 java中的字符串 
+	* @param  file
+	* @return String    返回类型 
+	* @throws
+	 */
+	public static String jsonStrToJavaJsonStr(File file){
+		List<String> lines = lines(file, ENCODE_GBK);
+		String jsonStr="";
+		for (String str : lines) {
+			str = str.replace("\"", "\\\"");
+			jsonStr += str.trim();
+		}
+		return jsonStr;
+	}
 }

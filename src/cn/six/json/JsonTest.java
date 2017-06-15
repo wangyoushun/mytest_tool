@@ -1,5 +1,8 @@
 package cn.six.json;
 
+import static org.junit.Assert.*;
+
+import java.io.File;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -11,12 +14,42 @@ import net.sf.json.JSONObject;
 import org.junit.Test;
 
 import cn.six.test.Bean;
+import cn.six.utils.FileUtil;
 
 /**
  * json-lib 测试json
  *
  */
 public class JsonTest {
+
+	//测试json串转为json对象
+	@Test
+	public void jsonStrToJson() throws Exception {
+		String str = "{\"name\": \"BeJson\",\"url\": \"http://www.bejson.com\",\"page\": 88,"
+				+ "\"isNonProfit\": true,\"address\": {\"street\": \"科技园路.\",\"city\": \"江苏苏州\",\"country\": \"中国\"},"
+				+ "\"links\": [{\"name\": \"Google\",\"url\": \"http://www.google.com\"},{\"name\": \"Baidu\","
+				+ "\"url\": \"http://www.baidu.com\"},{\"name\": \"SoSo\",\"url\": \"http://www.SoSo.com\"}]}";
+		JSONObject fromObject = JSONObject.fromObject(str);
+		System.out.println(fromObject.get("url"));
+		System.out.println(fromObject.get("city"));
+		JSONObject object = (JSONObject) fromObject.get("address");
+		System.out.println(object.getString("city"));
+		
+	}
+
+	//测试 json转 转义引号  方便拷贝到java代码中
+	@Test
+	public void jsonToString() throws Exception {
+		List<String> lines = FileUtil.lines(new File("D://tmp//json.txt"),
+				"GBK");
+		String stt = "";
+		for (String str : lines) {
+			str = str.replace("\"", "\\\"");
+			System.out.println(str);
+			stt += str.trim();
+		}
+		System.out.println(stt);
+	}
 
 	@Test
 	public void testStringToJson() {

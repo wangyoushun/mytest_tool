@@ -1,5 +1,13 @@
 package cn.six.utils;
 
+/**
+ * 
+* @ClassName: StringUtil 
+* @Description: 字符串工具类
+* @author iwantfly 
+* @date 2017年5月23日 下午9:43:34 
+*
+ */
 public class StringUtil {
 
 	public static final String EMPTY = "";
@@ -118,4 +126,9 @@ public class StringUtil {
 	public static String lowerCase(String str){
 		return str==null ? null : str.toLowerCase();
 	}
+	
+   //首字母转大小写
+	//驼峰下划线互转
+	
+	
 }

@@ -7,8 +7,10 @@ import java.io.File;
  */
 public class CleanMvn {
 	public static void main(String[] args) {
-//		String path = "D://programfile//apache-maven-3.3.9-bin//reposity2";
-		String path = "D:/programfile/apache-maven-3.3.9-bin/";
+		// String path = "D://programfile//apache-maven-3.3.9-bin//reposity2";
+		// String path = "D:/programfile/apache-maven-3.3.9-bin/";
+		// String path = "C:\\Users\\有顺\\.m2\\repository";
+		String path = "D:\\work_study\\maven\\roncoo-pay";
 		System.out.println("start====");
 		findAndDelete(new File(path));
 		System.out.println("end====");
