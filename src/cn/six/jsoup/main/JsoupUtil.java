@@ -9,13 +9,13 @@ import org.apache.commons.lang.math.RandomUtils;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 
-import cn.six.utils.FileUtil;
+import cn.six.utils.FileTool;
 
 public class JsoupUtil {
 	private static List<String> lines=null;
 	
 	static{
-		 lines = FileUtil.lines(new File("D://ip.txt"));
+		 lines = FileTool.lines(new File("D://ip.txt"));
 	}
 	
 	public static Document getDoc(String url,String proxyIp, int proxyPort) throws IOException{

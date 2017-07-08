@@ -10,13 +10,39 @@ import java.io.InputStreamReader;
 import java.io.RandomAccessFile;
 import java.nio.channels.FileChannel;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
-public class FileUtil {
-	
-	private static final String ENCODE_GBK="GBK";
-	private static final String ENCODE_UTF8="UTF-8";
-	
+/**
+ * 
+ * @ClassName: FileTool
+ * @Description: 提供一些文件操作工具类
+ * @author iwantfly
+ * @date 2017年7月8日 下午4:18:17
+ *
+ */
+public class FileTool {
+
+	public static final String ENCODE_GBK = "GBK";
+	public static final String ENCODE_UTF8 = "UTF-8";
+	private static final boolean TOCAMEL = false;
+
+	private static Map<String, String> map = new HashMap<String, String>();
+
+	// 提供sql语句转java实体类型
+	static {
+		map.put("tinyint", "Integer");
+		map.put("int", "Integer");
+		map.put("bigint", "Integer");
+		map.put("double", "Double");
+		map.put("varchar", "String");
+		map.put("char", "String");
+		map.put("date", "Date");
+		map.put("datetime", "Date");
+		map.put("timestamp", "Date");
+	}
+
 	/**
 	 * 以列表的方式获取文件的所有行
 	 *
@@ -99,6 +125,7 @@ public class FileUtil {
 
 	/**
 	 * 文件拷贝
+	 * 
 	 * @param s
 	 * @param t
 	 */
@@ -142,8 +169,8 @@ public class FileUtil {
 			}
 		} else {
 			File file2 = new File(destPath);
-			if(file2.exists() && file2.getName().equals(file.getName())){
-				System.out.println(file.getName()+"====exist");
+			if (file2.exists() && file2.getName().equals(file.getName())) {
+				System.out.println(file.getName() + "====exist");
 				return;
 			}
 			System.out.println("==file==" + file.getName() + "----"
@@ -154,19 +181,85 @@ public class FileUtil {
 
 	/**
 	 * 
-	* @Title: jsonStrToJavaJsonStr 
-	* @Description: 将json串转化为 java中的字符串 
-	* @param  file
-	* @return String    返回类型 
-	* @throws
+	 * @Title: jsonStrToJavaJsonStr
+	 * @Description: 将json串转化为 java中的字符串
+	 * @param file
+	 * @return String 返回类型
+	 * @throws
 	 */
-	public static String jsonStrToJavaJsonStr(File file){
+	public static String jsonStrToJavaJsonStr(File file) {
 		List<String> lines = lines(file, ENCODE_GBK);
-		String jsonStr="";
+		String jsonStr = "";
 		for (String str : lines) {
 			str = str.replace("\"", "\\\"");
 			jsonStr += str.trim();
 		}
 		return jsonStr;
 	}
+
+	/**
+	 * 
+	 * @Title: sqlStrToEntity
+	 * @Description: sql语句转java实体
+	 * @param @param path
+	 * @param @return 设定文件
+	 * @return String 返回类型
+	 * @throws
+	 */
+	public static String sqlStrToEntity(String path) {
+		return sqlStrToEntity(path, TOCAMEL);
+	}
+
+	/**
+	 * 
+	 * @Title: sqlStrToEntity
+	 * @Description: sql语句转java实体
+	 * @param @param path, isToCamel
+	 * @param @return 设定文件
+	 * @return String 返回类型
+	 * @throws
+	 */
+	public static String sqlStrToEntity(String path, boolean isToCamel) {
+		List<String> lines = lines(new File(path), ENCODE_GBK);
+		int size = lines.size();
+		if (size == 0) {
+			return "";
+		}
+
+		String entityStr = "";
+		String firstStr = lines.get(0);
+		if (!firstStr.contains("TABLE")) {
+			throw new RuntimeException("sql语句不正确");
+		}
+
+		for (int i = 1; i < size - 1; i++) {
+			String string = lines.get(i).trim();
+			if ("".equals(string)) {
+				continue;
+			}
+			String[] split = string.split(" ");
+			String filedName = split[0];
+			filedName = filedName.substring(1, filedName.length() - 1);
+			if (isToCamel) {
+				filedName = StringTool.underlineToCamel(filedName);
+			}
+
+			String filedType = split[1];
+			if (filedType.contains("(")) {
+				filedType = filedType.substring(0, filedType.indexOf("("));
+			}
+
+			filedType = map.get(filedType);
+
+			entityStr += "private " + filedType + " " + filedName + "; ";
+			if (string.contains("COMMENT")) {
+				String commentStr = split[split.length - 1].trim();
+				commentStr = commentStr.substring(1, commentStr.length() - 2);
+				entityStr += " //" + commentStr;
+			}
+			entityStr += "\n";
+		}
+		return entityStr;
+	}
+
 }

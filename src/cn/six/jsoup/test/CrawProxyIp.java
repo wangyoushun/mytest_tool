@@ -12,7 +12,7 @@ import org.jsoup.nodes.Document;
 import org.jsoup.select.Elements;
 import org.junit.Test;
 
-import cn.six.utils.FileUtil;
+import cn.six.utils.FileTool;
 
 public class CrawProxyIp {
 	Document doc=null;
@@ -43,7 +43,7 @@ public class CrawProxyIp {
 			ipsList.add(str);
 		}
 		
-		boolean writeAppend = FileUtil.writeAppend(new File("D://ip.txt"), ipsList);
+		boolean writeAppend = FileTool.writeAppend(new File("D://ip.txt"), ipsList);
 		System.out.println(writeAppend);
 	}
 	
@@ -51,7 +51,7 @@ public class CrawProxyIp {
 	public void validataIp() throws Exception {
 		String url="https://www.lagou.com/";
 		
-		List<String> lines = FileUtil.lines(new File("D://ip.txt"));
+		List<String> lines = FileTool.lines(new File("D://ip.txt"));
 		for (String string : lines) {
 			String[] split = string.split(":");
 			try {

@@ -14,7 +14,7 @@ import net.sf.json.JSONObject;
 import org.junit.Test;
 
 import cn.six.test.Bean;
-import cn.six.utils.FileUtil;
+import cn.six.utils.FileTool;
 
 /**
  * json-lib 测试json
@@ -40,7 +40,7 @@ public class JsonTest {
 	//测试 json转 转义引号  方便拷贝到java代码中
 	@Test
 	public void jsonToString() throws Exception {
-		List<String> lines = FileUtil.lines(new File("D://tmp//json.txt"),
+		List<String> lines = FileTool.lines(new File("D://tmp//json.txt"),
 				"GBK");
 		String stt = "";
 		for (String str : lines) {

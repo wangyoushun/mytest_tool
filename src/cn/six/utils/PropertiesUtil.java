@@ -7,6 +7,14 @@ import java.util.Set;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
+/**
+ * 
+* @ClassName: PropertiesUtil 
+* @Description: 读取Properties工具类
+* @author iwantfly
+* @date 2017年6月22日 下午11:22:49 
+*
+ */
 public class PropertiesUtil {
 	private final static Log LOG = LogFactory.getLog(PropertiesUtil.class);
 	private static Properties properties = new Properties();
@@ -34,7 +42,7 @@ public class PropertiesUtil {
 	public static Properties newInstance(String path){
 		try {
 			properties.load(PropertiesUtil.class.getClassLoader()
-					.getResourceAsStream("pay_config.properties"));
+					.getResourceAsStream(path));
 		} catch (IOException e) {
 			LOG.error(e.getMessage());
 		}

@@ -16,6 +16,7 @@ import org.apache.commons.logging.LogFactory;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.DateUtil;
+import org.apache.poi.ss.usermodel.Header;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
@@ -47,15 +48,16 @@ public class ExcelUtils {
 			String str = "";
 			int cols = sheet.getRow(0).getPhysicalNumberOfCells();
 			for (int i = 1; i < rows; i++) {
-				str="";
+				str = "";
 				Row row = sheet.getRow(i);
 				for (int j = 0; j < cols; j++) {
 					Cell cell = row.getCell(j);
+					cell.setCellType(Cell.CELL_TYPE_STRING);
 					str += cell.getStringCellValue() + ",";
 				}
-				if(str.length()>1)
-					str=str.substring(0,str.length()-1);
-				
+				if (str.length() > 1)
+					str = str.substring(0, str.length() - 1);
+
 				rowList.add(str);
 			}
 		} catch (Exception e) {
@@ -89,15 +91,11 @@ public class ExcelUtils {
 			int cols = sheet.getRow(0).getPhysicalNumberOfCells();
 			// headList = readHead(sheet, cols);
 			setColums(clazz);
-
 			for (int i = 1; i < rows; i++) {
 				Row row = sheet.getRow(i);
-
 				E obj = readRow(cols, row, excludeFiled, clazz);
 				list.add(obj);
-
 			}
-
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -131,7 +129,7 @@ public class ExcelUtils {
 			if (cell == null) {
 				continue;
 			}
-			cell.setCellType(1);
+			cell.setCellType(Cell.CELL_TYPE_STRING);
 			stringCellValue = cell.getStringCellValue();
 
 			Method[] declaredMethods = clazz.getDeclaredMethods();
@@ -156,7 +154,6 @@ public class ExcelUtils {
 					} else {
 						method.invoke(obj, stringCellValue);
 					}
-
 				}
 			}
 		}
