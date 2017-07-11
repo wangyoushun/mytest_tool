@@ -13,7 +13,17 @@ import cn.six.test.Bean;
 
 import com.google.gson.Gson;
 
+/**
+ * 
+ * @ClassName: GsonTest
+ * @Description: TODO(这里用一句话描述这个类的作用)
+ * @author A18ccms a18ccms_gmail_com
+ * @date 2017年7月11日 下午9:42:47
+ *
+ */
 public class GsonTest {
+
+	SysLogTool sysLog = new SysLogTool(true);
 	
 	@Test
 	public void JsonStrToBean() {
@@ -23,7 +33,7 @@ public class GsonTest {
 		Bean fromJson = gson.fromJson(str, Bean.class);
 		System.out.println(fromJson);
 	}
-	
+
 	@SuppressWarnings({ "unchecked", "rawtypes" })
 	@Test
 	public void testMapToJson() throws Exception {
@@ -37,10 +47,10 @@ public class GsonTest {
 		String json = gson.toJson(map);
 		System.out.println(json);
 	}
-	
+
 	@Test
 	public void testListToJson() throws Exception {
-		String [] arr ={"a","b","c"};
+		String[] arr = { "a", "b", "c" };
 		List<String> asList = Arrays.asList(arr);
 		Gson gson = new Gson();
 		String json = gson.toJson(arr);
@@ -48,7 +58,7 @@ public class GsonTest {
 		System.out.println(json);
 		System.out.println(json2);
 	}
-	
+
 	@Test
 	public void testBeanToJson() throws Exception {
 		Bean bean = new Bean();
@@ -58,16 +68,28 @@ public class GsonTest {
 		String json = gson.toJson(bean);
 		System.out.println(json);
 	}
-	
-	
+
 	@Test
-	public void testName() throws Exception {// Serialization
+	public void testJsonForArray() throws Exception {
 		Gson gson = new Gson();
-		gson.toJson(1);            // ==> 1
-		gson.toJson("abcd");       // ==> "abcd"
+		int[] ints={1,2,3,4,5};
+		String json = gson.toJson(ints);
+		sysLog.log(json);
+		
+		
+	}
+	
+	
+	//基本类型 序列化 反序列化
+	@SuppressWarnings("unused")
+	@Test
+	public void testJson() throws Exception {// Serialization
+		Gson gson = new Gson();
+		gson.toJson(1); // ==> 1
+		gson.toJson("abcd"); // ==> "abcd"
 		gson.toJson(new Long(10)); // ==> 10
 		int[] values = { 1 };
-		gson.toJson(values);       // ==> [1]
+		gson.toJson(values); // ==> [1]
 
 		// Deserialization
 		int one = gson.fromJson("1", int.class);
@@ -75,5 +97,6 @@ public class GsonTest {
 		Long two = gson.fromJson("1", Long.class);
 		Boolean b = gson.fromJson("false", Boolean.class);
 		String str = gson.fromJson("\"abc\"", String.class);
-		String[] anotherStr = gson.fromJson("[\"abc\"]", String[].class);}
+		String[] anotherStr = gson.fromJson("[\"abc\"]", String[].class);
+	}
 }
