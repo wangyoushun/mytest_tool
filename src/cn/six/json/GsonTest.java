@@ -30,8 +30,11 @@ public class GsonTest {
 		String str = "{\"id\":11,\"name\":\"ce shi\"}";
 		System.out.println(str);
 		Gson gson = new Gson();
+		gson.fromJson(str,Bean.class);
+
 		Bean fromJson = gson.fromJson(str, Bean.class);
 		System.out.println(fromJson);
+
 	}
 
 	@SuppressWarnings({ "unchecked", "rawtypes" })
