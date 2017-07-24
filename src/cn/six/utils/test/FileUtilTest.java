@@ -12,12 +12,12 @@ import org.junit.Test;
 import cn.six.utils.FileTool;
 
 public class FileUtilTest {
-	String path = "D:\\tmp\\file\\";
+	String path = "D:\\";
 
 
 	@Test
 	public void testSqlToEntity() throws Exception {
-		path += "user_sql.txt";
+		path += "order_detail.txt";
 		String sqlStrToEntity = FileTool.sqlStrToEntity(path, true);
 		System.out.println(sqlStrToEntity);
 		

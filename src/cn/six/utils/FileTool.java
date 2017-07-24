@@ -14,6 +14,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 /**
  * 
  * @ClassName: FileTool
@@ -24,6 +27,7 @@ import java.util.Map;
  */
 public class FileTool {
 
+	private static Logger logger = LoggerFactory.getLogger(FileTool.class);
 	public static final String ENCODE_GBK = "GBK";
 	public static final String ENCODE_UTF8 = "UTF-8";
 	private static final boolean TOCAMEL = false;
@@ -74,8 +78,7 @@ public class FileTool {
 	 */
 	public static List<String> lines(File file, String encoding) {
 		List<String> list = new ArrayList<>();
-		try (BufferedReader reader = new BufferedReader(new InputStreamReader(
-				new FileInputStream(file), encoding))) {
+		try (BufferedReader reader = new BufferedReader(new InputStreamReader(new FileInputStream(file), encoding))) {
 			String line;
 			while ((line = reader.readLine()) != null) {
 				list.add(line);
@@ -173,19 +176,15 @@ public class FileTool {
 				System.out.println(file.getName() + "====exist");
 				return;
 			}
-			System.out.println("==file==" + file.getName() + "----"
-					+ file.getAbsolutePath());
+			System.out.println("==file==" + file.getName() + "----" + file.getAbsolutePath());
 			fileChannelCopy(file, new File(destPath));
 		}
 	}
 
 	/**
 	 * 
-	 * @Title: jsonStrToJavaJsonStr
-	 * @Description: 将json串转化为 java中的字符串
-	 * @param file
-	 * @return String 返回类型
-	 * @throws
+	 * @Title: jsonStrToJavaJsonStr @Description: 将json串转化为 java中的字符串 @param
+	 *         file @return String 返回类型 @throws
 	 */
 	public static String jsonStrToJavaJsonStr(File file) {
 		List<String> lines = lines(file, ENCODE_GBK);
@@ -199,12 +198,8 @@ public class FileTool {
 
 	/**
 	 * 
-	 * @Title: sqlStrToEntity
-	 * @Description: sql语句转java实体
-	 * @param @param path
-	 * @param @return 设定文件
-	 * @return String 返回类型
-	 * @throws
+	 * @Title: sqlStrToEntity @Description: sql语句转java实体 @param @param
+	 *         path @param @return 设定文件 @return String 返回类型 @throws
 	 */
 	public static String sqlStrToEntity(String path) {
 		return sqlStrToEntity(path, TOCAMEL);
@@ -212,12 +207,8 @@ public class FileTool {
 
 	/**
 	 * 
-	 * @Title: sqlStrToEntity
-	 * @Description: sql语句转java实体
-	 * @param @param path, isToCamel
-	 * @param @return 设定文件
-	 * @return String 返回类型
-	 * @throws
+	 * @Title: sqlStrToEntity @Description: sql语句转java实体 @param @param path,
+	 *         isToCamel @param @return 设定文件 @return String 返回类型 @throws
 	 */
 	public static String sqlStrToEntity(String path, boolean isToCamel) {
 		List<String> lines = lines(new File(path), ENCODE_GBK);
@@ -239,7 +230,9 @@ public class FileTool {
 			}
 			String[] split = string.split(" ");
 			String filedName = split[0];
+			System.out.println(filedName);
 			filedName = filedName.substring(1, filedName.length() - 1);
+			System.out.println(filedName);
 			if (isToCamel) {
 				filedName = StringTool.underlineToCamel(filedName);
 			}
@@ -262,4 +255,36 @@ public class FileTool {
 		return entityStr;
 	}
 
+	/**
+	 * 删除目录，并判断执行删除操作后目录是否存在
+	 * 
+	 * @param folder
+	 * @return
+	 * @Date 2017年7月24日15:04:14
+	 */
+	public static boolean deleteFolder(File folder) {
+		return deleteFolderContents(folder) && folder.delete();
+	}
+	
+	/**
+	 * 
+	 * @param folder
+	 * @return
+	 */
+	public static boolean deleteFolderContents(File folder) {
+		logger.debug("Deleting content of: " + folder.getAbsolutePath());
+		File[] files = folder.listFiles();
+		for (File file : files) {
+			if (file.isFile()) {
+				if (!file.delete()) {
+					return false;
+				}
+			} else {
+				if (!deleteFolder(file)) {
+					return false;
+				}
+			}
+		}
+		return true;
+	}
 }
