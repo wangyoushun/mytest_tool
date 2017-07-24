@@ -1,18 +1,17 @@
 package cn.six.mystring;
 
-import static org.junit.Assert.*;
 
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
-import java.lang.reflect.Array;
-import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.commons.lang.StringUtils;
 import org.junit.Test;
@@ -22,6 +21,19 @@ import com.opslab.FileUtil;
 
 public class StringTest1 {
 
+	@Test
+	public void t01() throws Exception {
+		if("".equals(null)){
+			
+		}
+		
+		Map<String, String> map = new HashMap<String,String>();
+		map.put("1", null);
+		if(map.get("1").equals(null)){
+			
+		}
+	}
+	
 	 public static List<String> lines(File file) {
 	        List<String> list = new ArrayList<>();
 	        try {

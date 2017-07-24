@@ -1,5 +1,7 @@
 package cn.six.mycollection;
 
+import static org.junit.Assert.*;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -14,6 +16,15 @@ import org.junit.Test;
 
 public class MapTest {
 
+	@Test
+	public void testName() throws Exception {
+		Map<String, String> map = new HashMap<String, String>();
+		String string = map.get("a");
+		
+		System.out.println(string);
+	}
+	
+	
 	class bb {
 		Integer a;
 

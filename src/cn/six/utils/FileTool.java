@@ -239,7 +239,9 @@ public class FileTool {
 			}
 			String[] split = string.split(" ");
 			String filedName = split[0];
+			System.out.println(filedName);
 			filedName = filedName.substring(1, filedName.length() - 1);
+			System.out.println(filedName);
 			if (isToCamel) {
 				filedName = StringTool.underlineToCamel(filedName);
 			}
