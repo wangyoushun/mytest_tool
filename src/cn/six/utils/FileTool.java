@@ -96,6 +96,9 @@ public class FileTool {
 		try (RandomAccessFile randomFile = new RandomAccessFile(file, "rw")) {
 			long fileLength = randomFile.length();
 			randomFile.seek(fileLength);
+			if (fileLength > 0) {
+				randomFile.writeBytes(System.getProperty("line.separator"));
+			}
 			randomFile.writeBytes(str);
 			return true;
 		} catch (IOException e) {

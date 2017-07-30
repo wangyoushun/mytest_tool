@@ -1,7 +1,9 @@
 package cn.six.json;
 
-import static org.junit.Assert.*;
-
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.PrintStream;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
@@ -21,9 +23,9 @@ import com.google.gson.Gson;
  * @date 2017年7月11日 下午9:42:47
  *
  */
-public class GsonTest {
+public class GsonTest {         
 
-	SysLogTool sysLog = new SysLogTool(true);
+	SysLogTool sysLog = new SysLogTool(true, "D://tmp//gsontestLog.txt");
 	
 	@Test
 	public void JsonStrToBean() {
@@ -33,8 +35,21 @@ public class GsonTest {
 		gson.fromJson(str,Bean.class);
 
 		Bean fromJson = gson.fromJson(str, Bean.class);
-		System.out.println(fromJson);
-
+		sysLog.log(fromJson);
+		sysLog.toFile(fromJson.toString());
+		
+		//system.setout 测试  
+		try {
+			PrintStream out = System.out;
+			System.setOut(new PrintStream(new FileOutputStream(new File("D://tmp//gsontestLog.txt"),true)));
+			System.out.println("sdfadf");
+			System.out.println("sdfsdfsdfsdf4444444");
+			System.setOut(out);
+			System.out.println("over==============");
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 	@SuppressWarnings({ "unchecked", "rawtypes" })
