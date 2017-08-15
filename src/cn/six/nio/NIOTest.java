@@ -7,7 +7,7 @@ import java.nio.channels.FileChannel;
 
 import org.junit.Test;
 
-public class TestNio {
+public class NIOTest {
 
 	@Test
 	public void testdup() {
