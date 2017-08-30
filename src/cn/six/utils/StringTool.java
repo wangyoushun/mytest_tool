@@ -1,5 +1,9 @@
 package cn.six.utils;
 
+import java.util.Random;
+
+import org.junit.Test;
+
 /**
  * 
  * @ClassName: StringUtil
@@ -191,6 +195,39 @@ public class StringTool {
 			}
 		}
 		return sb.toString().toUpperCase();
+	}
+	
+	/**
+	 * 生成一个随机字符串
+	 * @return
+	 */
+	public static String generateRandomName() {
+		char[] charabc = { 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j',
+				'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v',
+				'w', 'x', 'y', 'z', 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H',
+				'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T',
+				'U', 'V', 'W', 'X', 'Y', 'Z', '0', '1', '2', '3', '4', '5',
+				'6', '7', '8', '9'};
+		Random random = new Random();
+		int length = random.nextInt(10);
+		String str="";
+		for(int i=length; i>-1; i--){
+			str += charabc[random.nextInt(62)];
+		}
+		return str;
+	}
+	
+	/**
+	 * 首字符大写
+	 * @param str
+	 * @return
+	 */
+	public static String firstToUp(String str){
+		if(str==null || str.trim().length()==0){
+			return "";
+		}
+		
+		return str.substring(0,1).toUpperCase()+str.substring(1);
 	}
 
 }
