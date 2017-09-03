@@ -207,13 +207,14 @@ public class FileTool {
 	public static String sqlStrToEntity(String path) {
 		return sqlStrToEntity(path, TOCAMEL);
 	}
-
+	
 	/**
 	 * 
 	 * @Title: sqlStrToEntity @Description: sql语句转java实体 @param @param path,
 	 *         isToCamel @param @return 设定文件 @return String 返回类型 @throws
 	 */
 	public static String sqlStrToEntity(String path, boolean isToCamel) {
+		System.out.println("========sql 转java实体==========");
 		List<String> lines = lines(new File(path), ENCODE_GBK);
 		int size = lines.size();
 		if (size == 0) {
@@ -226,16 +227,15 @@ public class FileTool {
 			throw new RuntimeException("sql语句不正确");
 		}
 
-		for (int i = 1; i < size - 1; i++) {
+		for (int i = 1; i < size ; i++) {
 			String string = lines.get(i).trim();
 			if ("".equals(string)) {
 				continue;
 			}
 			String[] split = string.split(" ");
 			String filedName = split[0];
-			System.out.println(filedName);
 			filedName = filedName.substring(1, filedName.length() - 1);
-			System.out.println(filedName);
+
 			if (isToCamel) {
 				filedName = StringTool.underlineToCamel(filedName);
 			}
