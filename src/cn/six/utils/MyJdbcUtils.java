@@ -590,6 +590,8 @@ public class MyJdbcUtils {
 			pstmt.setObject(k + 1, list.get(k));
 		}
 
-		return pstmt.executeUpdate();
+		int executeUpdate = pstmt.executeUpdate();
+		closeConnection(connection);
+		return executeUpdate;
 	}
 }

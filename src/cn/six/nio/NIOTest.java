@@ -49,20 +49,20 @@ public class NIOTest {
 	@Test
 	public void testNioPar() {
 		ByteBuffer bf = ByteBuffer.allocate(15);
-		System.out.println(bf.capacity() + ",  " + bf.limit() + ",  "
+		System.out.println("1---"+bf.capacity() + ",  " + bf.limit() + ",  "
 				+ bf.position());
 		for (int i = 0; i < 10; i++) {
 			bf.put((byte) i);
 		}
-		System.out.println(bf.capacity() + ",  " + bf.limit() + ",  "
+		System.out.println("2----"+bf.capacity() + ",  " + bf.limit() + ",  "
 				+ bf.position());
 		bf.flip();
-		System.out.println(bf.capacity() + ",  " + bf.limit() + ",  "
+		System.out.println("3---"+bf.capacity() + ",  " + bf.limit() + ",  "
 				+ bf.position());
 		for (int i = 0; i < 5; i++) {
 			bf.get();
 		}
-		System.out.println(bf.capacity() + ",  " + bf.limit() + ",  "
+		System.out.println("4----"+bf.capacity() + ",  " + bf.limit() + ",  "
 				+ bf.position());
 		bf.flip();
 		System.out.println(bf.capacity() + ",  " + bf.limit() + ",  "

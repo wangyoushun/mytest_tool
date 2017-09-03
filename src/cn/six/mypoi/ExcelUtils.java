@@ -52,8 +52,13 @@ public class ExcelUtils {
 				Row row = sheet.getRow(i);
 				for (int j = 0; j < cols; j++) {
 					Cell cell = row.getCell(j);
-					cell.setCellType(Cell.CELL_TYPE_STRING);
-					str += cell.getStringCellValue() + ",";
+					if(cell!=null){
+						cell.setCellType(Cell.CELL_TYPE_STRING);
+						str += cell.getStringCellValue() + ",";
+					}else{
+						str += ",";
+					}
+					
 				}
 				if (str.length() > 1)
 					str = str.substring(0, str.length() - 1);

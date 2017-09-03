@@ -1,5 +1,7 @@
 package cn.six.test;
 
+import static org.junit.Assert.*;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -7,6 +9,17 @@ import org.junit.Test;
 
 public class Test_cha {
 
+	@Test
+	public void test02() throws Exception {
+		String key = "key";
+		int hashCode = key.hashCode();
+		int length = 30;
+		int index = hashCode % length;
+		System.out.println(index);
+		
+		
+	}
+	
 	@Test
 	public void testDouble(){
 		double a = 1.10;

@@ -1,9 +1,20 @@
 package cn.six.test;
 
+import static org.junit.Assert.*;
+
 import java.lang.reflect.Method;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
+import org.junit.Test;
 
 public class Test_final {
 
+	@Test
+	public void testName() throws Exception {
+		Date date = new Date(1525397220000L);
+		System.out.println(new SimpleDateFormat("yyyy-MM-dd").format(date));
+	}
 	
 	public final void  test2(){
 		System.out.println("test2");
