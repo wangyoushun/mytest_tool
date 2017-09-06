@@ -35,13 +35,56 @@ public class TestPoi {
 
 
 	String path = "D:\\tmp\\file\\";
+	
+	
+	
+	
+	// test 以字符串形式读取excel数据   导入汽配用户报表数据
+	@SuppressWarnings("deprecation")
+	@Test
+	public void testReadByString4() throws Exception {
+		path = "f://004.xlsx";
+		List<String> readExcel = ExcelUtils.readExcel(path);
+		List<UserReport> list = new ArrayList<UserReport>();
+		int year = 2017;
+		int month=6;
+		for (String string : readExcel) {
+//			System.out.println(string);
+			String[] split = string.split(",");
+//			System.out.println(Arrays.toString(split));
+	        Integer no = getInt(split[0]);
+	        String supplier = split[1];
+	        double money = Double.parseDouble(split[2]);
+//	        System.out.println(no+"--"+supplier+"--"+money);
+	        String str="insert into reports_supplier(number, supplier, turnover, year, month  )"
+	        		+ "values ("+no+", '"+supplier+"', "+money+","+year+","+month+");";
+	        System.out.println(str);
+	        
+	        
+	        
+//			list.add(userReport);
+		}
+//		System.out.println(list);
+		
+//		for (UserReport userReport : list) {
+//			String str = "insert into user_report(`year`, `month`,  `add_buyers`,  `add_seller` , `new_user` , `active_buyers`, `active_seller`, `buyer_activity_rate` "
+//					+ ",seller_activity_rate, deal_buyers, deal_seller, accumulated_buyers, accumulated_seller, total_user) values (" 
+//					+userReport.getYear()+","+userReport.getMonth()+","+userReport.getAddBuyers()+","+userReport.getAddSeller()+","+userReport.getNewUser()
+//					+","+userReport.getActiveBuyers()+","+userReport.getActiveSeller()+",'"+userReport.getBuyerActivityRate()
+//					+"','"+userReport.getSellerActivityRate()+"',"+userReport.getDealBuyers()+","+userReport.getDealSeller()+","+userReport.getAccumulatedBuyers()
+//					+","+userReport.getAccumulatedSeller()+","+userReport.getTotalUser()+ ");";
+//			System.out.println(str);
+//		}
+	}
+	
+	
 
-	// test 以字符串形式读取excel数据
+	// test 以字符串形式读取excel数据 导入汽配城市报表数据
 	@SuppressWarnings("deprecation")
 	@Test
 	public void testReadByString3() throws Exception {
-		path = "f://003.xlsx";
-		String cityName = "广州	佛山	东莞	湛江	杭州	上海	绍兴	金华	深圳	中山	汕头	温州	宁波	义乌	惠州	茂名";
+		path = "f://1001.xlsx";
+		String cityName = "广州	佛山	东莞	湛江	杭州	上海	绍兴	金华	深圳	中山	汕头	温州	宁波	义乌	惠州	茂名	海宁";
 		String[] cityArray = cityName.split("	");
 		List<String> readExcel = ExcelUtils.readExcel(path);
 		List<Map<String, Object>> list = new ArrayList<Map<String, Object>>();
@@ -79,14 +122,14 @@ public class TestPoi {
 		// System.out.println(cityList);
 		for (City city : cityList) {
 			// System.out.println(city);
-			String str = "insert into city(city, year, month, money) values ('" + city.getCity() + "'," + city.getYear()
+			String str = "insert into report_city(city, year, month, money) values ('" + city.getCity() + "'," + city.getYear()
 					+ "," + city.getMonth() + "," + city.getMoney() + ");";
 			System.out.println(str);
 		}
 
 	}
 
-	// test 以字符串形式读取excel数据
+	// test 以字符串形式读取excel数据   导入汽配用户报表数据
 	@SuppressWarnings("deprecation")
 	@Test
 	public void testReadByString2() throws Exception {
