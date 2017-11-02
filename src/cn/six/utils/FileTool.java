@@ -207,7 +207,7 @@ public class FileTool {
 	public static String sqlStrToEntity(String path) {
 		return sqlStrToEntity(path, TOCAMEL);
 	}
-	
+
 	/**
 	 * 
 	 * @Title: sqlStrToEntity @Description: sql语句转java实体 @param @param path,
@@ -227,7 +227,7 @@ public class FileTool {
 			throw new RuntimeException("sql语句不正确");
 		}
 
-		for (int i = 1; i < size ; i++) {
+		for (int i = 1; i < size; i++) {
 			String string = lines.get(i).trim();
 			if ("".equals(string)) {
 				continue;
@@ -268,7 +268,7 @@ public class FileTool {
 	public static boolean deleteFolder(File folder) {
 		return deleteFolderContents(folder) && folder.delete();
 	}
-	
+
 	/**
 	 * 
 	 * @param folder
@@ -289,5 +289,10 @@ public class FileTool {
 			}
 		}
 		return true;
+	}
+
+	public static void main(String[] args) {
+		String sqlStrToEntity = sqlStrToEntity("F://1.txt", false);
+		System.out.println(sqlStrToEntity);
 	}
 }

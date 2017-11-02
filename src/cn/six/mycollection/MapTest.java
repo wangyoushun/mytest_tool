@@ -20,11 +20,10 @@ public class MapTest {
 	public void testName() throws Exception {
 		Map<String, String> map = new HashMap<String, String>();
 		String string = map.get("a");
-		
+
 		System.out.println(string);
 	}
-	
-	
+
 	class bb {
 		Integer a;
 
@@ -59,8 +58,7 @@ public class MapTest {
 			e.printStackTrace();
 		}
 		System.out.println(weakHashMap);
-		Iterator<Entry<bb, Integer>> iterator = weakHashMap.entrySet()
-				.iterator();
+		Iterator<Entry<bb, Integer>> iterator = weakHashMap.entrySet().iterator();
 		while (iterator.hasNext()) {
 			Entry<bb, Integer> next = iterator.next();
 			System.out.println(next);
@@ -69,28 +67,44 @@ public class MapTest {
 	}
 
 	/**
-	 * test linkedHashMap
+	 * test linkedHashMap lru
 	 */
 	@Test
 	public void linkedHashMap() {
-		LinkedHashMap<String, String> linkedHashMap = new LinkedHashMap<String, String>(
-				16, 0.75f, true); // 按照访问顺序排序
+		//lru 不删除数据
+		LinkedHashMap<String, String> linkedHashMap = new LinkedHashMap<String, String>(2, 0.75f, true); // 按照访问顺序排序
 		// LinkedHashMap<String,String> linkedHashMap = new
 		// LinkedHashMap<String,String>(); //按照插入顺序排序
 		linkedHashMap.put("a", "a");
 		linkedHashMap.put("b", "b");
 		linkedHashMap.put("c", "c");
+		linkedHashMap.put("d", "d");
+		linkedHashMap.put("e", "e");
 
-		for (Entry<String, String> s : linkedHashMap.entrySet()) {
-			System.out.println(s);
-		}
-
-		Iterator<String> iterator = linkedHashMap.keySet().iterator();
-		while (iterator.hasNext()) {
-			String next = iterator.next();
-			System.out.println(linkedHashMap.get(next));
-		}
-
+		System.out.println(linkedHashMap);
+		linkedHashMap.get("b");
+		System.out.println(linkedHashMap);
+		linkedHashMap.put("f", "f");
+		linkedHashMap.put("g", "g");
+		linkedHashMap.get("a");
+		System.out.println(linkedHashMap);
+		
+		//lru 删除超过容量的数据数据
+		final int cacheSize = 4;
+		Map<String, String> map = new LinkedHashMap<String, String>((int) Math.ceil(cacheSize / 0.75f) + 1, 0.75f, true) {
+		    @Override
+		    protected boolean removeEldestEntry(Map.Entry<String, String> eldest) {
+		    return size() > cacheSize;
+		    }
+		};
+		map.put("a", "a");
+		map.put("b", "b");
+		map.put("c", "c");
+		map.put("d", "d");
+		System.out.println(map);
+		map.get("b");
+		map.put("f", "f");
+		System.out.println(map);
 	}
 
 	/**
@@ -108,10 +122,7 @@ public class MapTest {
 	}
 
 	/**
-	 * test map size modCount 1000 
-	 * entrySet size 1000 
-	 * loadFactor=0.75 
-	 * table 2048
+	 * test map size modCount 1000 entrySet size 1000 loadFactor=0.75 table 2048
 	 * threshold table*loadFactor=1536
 	 */
 	@Test

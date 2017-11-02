@@ -93,6 +93,9 @@ public class MyLog  {
 	}
 	
 	public static void main(String[] args) throws Exception {
+		String classPath = Thread.currentThread().getContextClassLoader()  
+	            .getResource("").getPath();   
+		System.out.println(classPath);
 		for(int i=0;;i++){
 			log2File(i,"C:/Users/Administrator/Desktop/ttt.txt");
 		}

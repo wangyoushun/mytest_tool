@@ -10,7 +10,9 @@ public class CleanMvn {
 		// String path = "D://programfile//apache-maven-3.3.9-bin//reposity2";
 		// String path = "D:/programfile/apache-maven-3.3.9-bin/";
 		// String path = "C:\\Users\\有顺\\.m2\\repository";
-		String path = "D:\\work_study\\maven\\roncoo-pay";
+//		String path = "C:\\Users\\Administrator\\.m2\\repository";
+		String path = "D://repo";
+		// String path = "D:\\work_study\\maven\\roncoo-pay";
 		System.out.println("start====");
 		findAndDelete(new File(path));
 		System.out.println("end====");
@@ -38,7 +40,7 @@ public class CleanMvn {
 		if (!file.exists()) {
 		} else if (file.isFile()) {
 			print("删除文件:" + file.getAbsolutePath());
-			file.delete();
+			//file.delete();
 		} else if (file.isDirectory()) {
 			File[] files = file.listFiles();
 			for (File f : files) {
@@ -46,7 +48,7 @@ public class CleanMvn {
 			}
 			print("删除文件夹:" + file.getAbsolutePath());
 			print("====================================");
-			file.delete();
+			//file.delete();
 		}
 	}
 
