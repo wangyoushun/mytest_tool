@@ -12,9 +12,19 @@ import org.junit.Test;
 import cn.six.utils.FileTool;
 
 public class FileUtilTest {
-	String path = "D:\\";
+	String path = "D:\\new 1.txt";
 
 
+	@Test
+	public void readFile() throws Exception {
+		List<String> lines = FileTool.lines(new File(path));
+		String str="";
+		for (String string : lines) {
+			str += string+",";
+		}
+		System.out.println(str+"\"");
+	}
+	
 	@Test
 	public void testSqlToEntity() throws Exception {
 		path += "order_detail.txt";
